@@ -4,7 +4,6 @@ import "./ItemCount.scss"
 
 export const ItemCount = ({max, counter, setCounter, handleAgregar}) => {
  
-
   const handleSumar = () => {
     if (counter < max) {
       setCounter(counter + 1);

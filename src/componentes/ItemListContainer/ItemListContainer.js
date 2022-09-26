@@ -13,36 +13,34 @@ export const ItemListContainer = () => {
 
   const { categoryId } = useParams() 
   
-  
   useEffect(() => {
     setLoading(true)
 
     setColor("#36d6d2")
 
     pedirDatos()
-     .then( (data) => {
+      .then( (data) => {
         if (!categoryId){
-         setItems(data)
+          setItems(data)
         }else{
           setItems( data.filter((item)=> item.category === categoryId) )
         }
-     })
-     .catch ((error) => {
-         console.log(error)
-     })
-    .finally(()=>{
-      setLoading(false)
-    })
-
+      })
+      .catch ((error) => {
+        console.log(error)
+      })
+      .finally(()=>{
+        setLoading(false)
+      })
   }, [categoryId])
 
   return (
-      <div>
-        {
-          loading ? <PacmanLoader  color={color} loading={loading}  size={100} />
-          :<ItemList items={items}/> 
-        }
-     </div>
+    <div>
+      {
+        loading ? <PacmanLoader  color={color} loading={loading}  size={100} />
+        :<ItemList items={items}/> 
+      }
+    </div>
   )
 }
 

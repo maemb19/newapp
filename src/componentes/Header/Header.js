@@ -4,14 +4,19 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { CartWidget } from '../cartWidget/CartWidget'
 import { Link } from "react-router-dom"
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 import "./header.scss"
  
 export const Header = () => {
- 
+
+  const {cart} = useContext(CartContext)
   return (
     <>
       <Navbar  className='Navbar'>
-        <img src="/assets/img/Logo.jpg" alt="Logo" className='logo'/>
+        <Link to="/">
+          <img src="/assets/img/Logo.jpg" alt="Logo" className='logo'/>
+        </Link>
         <Container className="justify-content-center">
           <Nav className='links'>
             <Nav.Item>
@@ -25,7 +30,7 @@ export const Header = () => {
             </Nav.Item>
           </Nav>
         </Container>
-        <CartWidget/>
+        {cart.length > 0 && <CartWidget/>}
       </Navbar>
     </>
   )
