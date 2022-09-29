@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams }  from "react-router-dom"
 import { ItemDetail } from "../ItemDetail/ItemDetail"
 import Loader from "../loader/Loader";
-import { db } from '../../componentes/firebase/config'
+import { db } from '../firebase/config'
 import { doc, getDoc } from "firebase/firestore";
 
 export const ItemDetailContainer = () =>{
@@ -37,7 +37,7 @@ export const ItemDetailContainer = () =>{
             ?  <Loader/>
             : <ItemDetail producto={producto}/>  
             }
-       </div>
+        </div>
     )
 }
 
