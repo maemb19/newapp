@@ -1,31 +1,32 @@
 import { useEffect, useState } from "react";
-import { pedirDatos } from "../../helpers/pedirDatos"
 import { useParams }  from "react-router-dom"
 import { ItemDetail } from "../ItemDetail/ItemDetail"
-import PacmanLoader from "react-spinners/PacmanLoader"
+import Loader from "../loader/Loader";
+import { db } from '../../componentes/firebase/config'
+import { doc, getDoc } from "firebase/firestore";
 
 export const ItemDetailContainer = () =>{
 
     const [producto, setProducto] = useState(null)
-    const [loading, setLoading ] = useState( true)
-    const [color, setColor] = useState("#36d6d2");
-
+    const [loading, setLoading ] = useState(true)
+    
     const {productoId} = useParams()
 
 
-    useEffect(()=> {
+    useEffect(() => {
 
         setLoading(true)
-        setColor("#36d6d2")
 
-        pedirDatos()
-        .then((res)=>{
-            setProducto( res.find((item)=> item.id === Number(productoId)) )
-        })
-        .catch(err => console.log(err))
-        .finally(()=>{
+        const docRef = doc(db,"productos", productoId)
+
+        getDoc(docRef)
+           .then((doc) => {
+            setProducto({id: doc.id, ...doc.data()})
+           })
+           .finally(() => {
             setLoading(false)
-        })
+           })
+         
 
     }, [])
 
@@ -33,7 +34,7 @@ export const ItemDetailContainer = () =>{
         <div>
             {
             loading 
-            ?  <PacmanLoader  color={color} loading={loading}  size={100}/>
+            ?  <Loader/>
             : <ItemDetail producto={producto}/>  
             }
        </div>
