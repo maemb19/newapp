@@ -45,7 +45,7 @@ export const CartProvider = ({children}) => {
   const terminarCompra = (id) => {
     Swal.fire({
       title: '¡Compra exitosa!',
-      text: 'Tú número de orden es: $(id)',
+      text: `Tú número de orden es: ${id}`,
       imageUrl: '/assets/img/saludo.jpg',
       confirmButtonColor: '#39d4ec',
       confirmButtonText: 'Aceptar'
